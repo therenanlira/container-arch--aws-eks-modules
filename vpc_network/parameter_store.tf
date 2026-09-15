@@ -1,7 +1,7 @@
 # SSM Parameter Store
 
-resource "aws_ssm_parameter" "vpc" {
-  name = "/${local.regional_prefix}/vpc"
+resource "aws_ssm_parameter" "vpc_netwo" {
+  name = "/${local.ssm_prefix}/vpc-network"
   type = "String"
 
   insecure_value = jsonencode({
@@ -13,4 +13,8 @@ resource "aws_ssm_parameter" "vpc" {
     public_route_table_ids  = { for az in local.vpc_azs : az => aws_route_table.public[az].id }
     private_route_table_ids = { for az in local.vpc_azs : az => aws_route_table.private[az].id }
   })
+
+  tags = {
+    Name = "/${local.regional_prefix}/vpc-network"
+  }
 }

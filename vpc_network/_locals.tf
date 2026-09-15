@@ -1,6 +1,7 @@
 locals {
-  regional_prefix = var.environment
-  global_prefix   = "${var.environment}-${data.aws_region.current.region}"
+  regional_prefix = "${var.environment}-${var.project_name}"
+  global_prefix   = "${var.environment}-${data.aws_region.current.region}-${var.project_name}"
+  ssm_prefix      = "${var.environment}/${data.aws_region.current.region}/${var.project_name}"
 
   subnet_private_blocks = cidrsubnet(var.cidr_block, 2, 0)
   subnet_public_blocks  = cidrsubnet(var.cidr_block, 2, 1)

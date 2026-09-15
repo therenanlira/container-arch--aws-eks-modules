@@ -12,6 +12,10 @@ resource "aws_route53_zone" "private" {
   lifecycle {
     ignore_changes = [vpc]
   }
+
+  tags = {
+    Name = "${var.project_name}.internal.com"
+  }
 }
 
 resource "aws_route53_zone_association" "main" {
