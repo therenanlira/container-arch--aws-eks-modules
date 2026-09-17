@@ -68,3 +68,35 @@ variable "addon_kubeproxy_version" {
   type        = string
   default     = "v1.36.0-eksbuild.17"
 }
+
+variable "nodes_config" {
+  description = "EKS nodes capacity type"
+  type = list(object({
+    name          = string
+    capacity_os   = string
+    capacity_type = string
+    capacity_arch = optional(string)
+    ami_type      = optional(string)
+    severity      = optional(string)
+  }))
+  default = [
+    {
+      name          = "default"
+      capacity_os   = "AMAZON_LINUX"
+      capacity_type = "ON_DEMAND"
+      capacity_arch = "x86_64"
+      ami_type      = null
+      severity      = "critical"
+    }
+  ]
+}
+
+variable "custom_node" {
+  description = "Custom AMI for EKS nodes"
+  type = object({
+    name      = string
+    file_path = string
+    labels    = optional(map(string))
+  })
+  default = null
+}

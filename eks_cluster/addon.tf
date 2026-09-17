@@ -17,9 +17,8 @@ resource "aws_eks_addon" "coredns" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
 
-  # CoreDNS é um Deployment: sem nodes, o add-on não fica ACTIVE.
   depends_on = [
-    aws_eks_node_group.main
+    aws_eks_node_group.these
   ]
 }
 

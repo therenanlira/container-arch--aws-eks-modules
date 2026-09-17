@@ -81,6 +81,11 @@ resource "aws_iam_role_policy_attachment" "eks_nodes_cloudwatch" {
   role       = aws_iam_role.eks_nodes.name
 }
 
+resource "aws_iam_role_policy_attachment" "eks_nodes_ecr" {
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryPullOnly"
+  role       = aws_iam_role.eks_nodes.name
+}
+
 resource "aws_iam_instance_profile" "eks_nodes" {
   name = "${local.global_prefix}-eksnodes-instanceprofile"
   role = aws_iam_role.eks_nodes.name
