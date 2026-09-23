@@ -19,7 +19,8 @@ resource "helm_release" "metrics_server" {
 
   depends_on = [
     aws_eks_cluster.main,
-    aws_eks_node_group.these
+    aws_eks_node_group.these,
+    aws_eks_fargate_profile.wildcard
   ]
 }
 
@@ -49,6 +50,7 @@ resource "helm_release" "kube_state_metrics" {
 
   depends_on = [
     aws_eks_cluster.main,
-    aws_eks_node_group.these
+    aws_eks_node_group.these,
+    aws_eks_fargate_profile.wildcard
   ]
 }

@@ -9,8 +9,15 @@ tf() {
 }
 
 apply() {
-  tf "$VPC_DIR" apply
-  tf "$EKS_DIR" apply
+  pushd $VPC_DIR \
+  && terraform init -upgrade \
+  && tf "$VPC_DIR" apply \
+  && popd
+  
+  pushd $EKS_DIR \
+  && terraform init -upgrade \
+  && tf "$EKS_DIR" apply \
+  && popd
   aws eks update-kubeconfig --name prd-ct-arch-eks --alias learning-account--prd-ct-arch-eks
 }
 

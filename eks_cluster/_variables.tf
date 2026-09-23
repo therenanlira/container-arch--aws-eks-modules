@@ -100,3 +100,21 @@ variable "custom_node" {
   })
   default = null
 }
+
+variable "fargate_services" {
+  description = "Services to run on Fargate mode"
+  type        = list(string)
+  default     = [""]
+}
+
+variable "enable_namespace_wildcard" {
+  description = "Enable or not the Wildcard Namespace for Fargate mode"
+  type        = bool
+  default     = false
+}
+
+variable "enable_coredns_fix" {
+  description = "Create or not the Lambda to fix the coredns"
+  type        = bool
+  default     = false
+}
